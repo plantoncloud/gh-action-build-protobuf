@@ -25,13 +25,15 @@ planton auth machine login \
   --client-id $PLANTON_CLOUD_SERVICE_CLIENT_ID \
   --client-secret $PLANTON_CLOUD_SERVICE_CLIENT_SECRET
 echo "successfully exchanged planton-cloud machine-account credentials and received an access token"
-echo "fetching buf token from artifact-store: ${PLANTON_CLOUD_ARTIFACT_STORE_ID}"
+
+#echo "fetching buf token from artifact-store: ${PLANTON_CLOUD_ARTIFACT_STORE_ID}"
+#todo: test and restore buf login support
+#todo: add buf-username fetching using cli
 #looks up buf-token configured on artifact-store and exports it as an environment variable.
 #if either the artifact-store does not have a buf-token or project does not import any npm packages from
 # npm repository on buf.build, this step has no effect.
-export BUF_TOKEN=$(planton product artifact-store secrets get-buf-token --artifact-store-id ${PLANTON_CLOUD_ARTIFACT_STORE_ID} 2>&1)
-echo "successfully fetched buf token from artifact-store: ${PLANTON_CLOUD_ARTIFACT_STORE_ID}"
-#todo: add buf-username fetching using cli
+#export BUF_TOKEN=$(planton product artifact-store secrets get-buf-token --artifact-store-id ${PLANTON_CLOUD_ARTIFACT_STORE_ID} 2>&1)
+#echo "successfully fetched buf token from artifact-store: ${PLANTON_CLOUD_ARTIFACT_STORE_ID}"
 echo "running 'make build' step"
 make build
 echo "step 'make build' completed successfully"
